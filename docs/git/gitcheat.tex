@@ -1,0 +1,192 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+
+% PACKAGES
+\usepackage[margin=1.0in]{geometry}
+\usepackage{fancyhdr, etoolbox}
+\usepackage{amsmath} 
+\usepackage{titlesec}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{listings} % Allows code lines (verbatim, lstlisting)
+\usepackage{xcolor} % Colour
+\usepackage{enumerate}
+\usepackage{multirow} % Enables multicolumn
+\usepackage{longtable}
+
+\usepackage{subfiles} % Allows subfile docs
+\usepackage{blindtext}
+
+% Fancy header formatting
+\pagestyle{fancy}
+\setlength{\headheight}{16pt}
+
+\fancyhf{}
+\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{\textit{\nouppercase{\rightmark}}}
+\fancyhead[LO]{\textit{\nouppercase{\rightmark}}}
+
+% Section font sizes
+\titleformat*{\section}{\Large\bfseries}
+\titleformat*{\subsection}{\large\bfseries}
+\titleformat*{\subsubsection}{\large}
+
+% Invisible section
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+  
+% New commands:
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\filestr}[1]{$\langle \text{#1} \rangle$}
+
+
+\title{Git Cheat Sheet}
+\author{Daniel Park}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\pagebreak
+
+\section{Preliminaries}
+
+\begin{center}
+    \begin{tabular}{|p{0.25\textwidth}|p{0.7\textwidth}|}
+    \hline
+        \multicolumn{1}{|c|}{Step} & \multicolumn{1}{c|}{Description} \\
+    \hline
+        Installing VS Code & Open up VSCode. Go to `Shell Command: Install `code command ...' to set up the environment variable. This enables the command \code{code .} \\
+    \hline
+        \code{command -flag \filestr{dir}} & Every terminal and git command follows the given format. All file and folder names \filestr{dir} must be in quotations. \\
+    \hline
+        Configure VS Code & Run \code{git config --global core.editor "code --wait} in git bash. This will configure VS Code as the default git editor over VIM. \\
+    \hline
+    
+    \end{tabular}
+    
+\end{center}
+\section{Terminal commands}
+
+\begin{center}
+    \begin{tabular}{|l|l|}
+    \hline
+        \multicolumn{1}{|c|}{Command} & \multicolumn{1}{c|}{Description} \\
+    \hline
+         \code{ls} & Lists contents of current directory \\
+         \code{ls \filestr{folder}} & Lists contents of \filestr{folder} \\
+         \code{ls -a} & Lists all directories and files, including hidden ones \\
+    \hline
+        \code{start .} & Opens up the file explorer in the current directory \\
+        \code{open .} & The \code{start} command on Mac \\
+    \hline
+        \code{pwd} & Shows the current directory location \\
+    \hline
+        \code{cd \filestr{folder}} & Changes your current directory to \filestr{folder} \\
+        \code{cd ~} & Go back to home directory. Note that ~ denotes home directory \\
+        \code{cd ..} & Move backwards to the parent folder of current directory \\
+    \hline
+        \code{clear} & Clears the terminal \\
+    \hline
+        \code{code .} & Opens the current directory in VSCode \\
+    \hline
+        \code{touch \filestr{file}} & Creates a file called \filestr{file} in the current directory \\
+        \code{touch \filestr{file1} \filestr{file2}} & Creats files called \filestr{file1} and \filestr{file2} in the current directory \\
+        \code{mkdir \filestr{folder}} & Creates a folder called \filestr{folder} \\
+    \hline
+        \code{rm \filestr{file}} & Deletes the file called \filestr{file} \\
+        \code{rm -rf \filestr{folder}} & Deletes the folder \filestr{folder} \\
+    \hline
+    \end{tabular}
+\end{center}
+
+\pagebreak
+
+\section{Git commands}
+
+Git structure: 
+\begin{center}
+    Working directory $\overset{\code{git add}}{\longrightarrow}$ Staging area $\overset{\code{git commit}}{\longrightarrow}$ Repository
+\end{center}
+
+Git GUI: \href{https://www.gitkraken.com}{Git Kraken}. Use the GUI to copy commit hashes.
+
+Resources:
+\begin{itemize}
+    \item 
+    Full documentation: \href{https://git-scm.com/docs/}{git-scm.com/docs}
+    \item
+    Book on git: \href{https://git-scm.com/book/en/v2}{git-scm.com/book}
+\end{itemize}
+
+Git ignore template: \href{https://www.toptal.com/developers/gitignore}{git ignore io}
+\begin{itemize}
+    \item 
+    Use \code{touch `.gitignore'} to create the file.
+    \item
+    Set up the .gitignore file first before committing files. Otherwise you must remove the files to be ignored from the cache.
+\end{itemize}
+
+\begin{center}
+    \begin{longtable}{|p{0.25\textwidth}|p{0.7\textwidth}|}
+    \hline
+        \multicolumn{1}{|c|}{Command} & \multicolumn{1}{c|}{Description} \\
+    \hline
+        \code{git init} & Initializes the repository in the current directory. Creates a hidden folder called `.git'. \\
+    \hline
+        \code{git status} & Shows the status of the current git repository. \\
+    \hline 
+        \code{git add \filestr{file}} & Adds \filestr{file} to the staging area. \\
+        \code{git add .} & Adds all changed files to the staging area. \\
+    \hline
+        \code{git commit} & Uploads all staged files to the git repository. Creates a commit. \\
+        \code{git commit -m \filestr{msg}} & Creates a commit with the message \filestr{msg}. \\
+        \code{git commit -{}-amend} & Updates the previous commit with all currently staged changes. \\
+    \hline
+        \code{git log} & Shows the history of all commits made in the repo. \\
+        \code{git log --oneline} & Condenses the log into abbreviated hashes and the header line of each commit message. \\
+    \hline
+        \code{git branch} & Lists all branches. Active branch has an asterisk (*). \\
+        \code{git branch \filestr{branch}} & Creates a new branch \filestr{branch} with the parent commit being where HEAD is on. Multiple branches share the same parent commit. \\
+    \hline
+        \code{git switch \filestr{branch}} & Switches the active branch to \filestr{branch}. All unstaged changes are lost. \\
+        \code{git checkout \filestr{branch}} & A generalized command of \code{git switch} and \code{git restore}. \\
+        \code{git switch -c \filestr{branch}} & Creates a new branch and switches you over to it. \\
+        \code{git checkout \filestr{branch}} & Does the same thing as \code{git switch -c \filestr{branch}}. \\
+    \hline
+        \code{git branch -d \filestr{branch}} & Deletes the branch \filestr{branch}. Must be full merged before doing so. \\
+        \code{git branch -d \filestr{branch}} & Deletes the branch \filestr{branch} unconditionally. \\
+    \hline
+        \code{git branch -m \filestr{branch}} & Renames the current branch name to \filestr{branch}. \\
+    \hline
+        \code{git merge \filestr{branch}} & Merges \filestr{branch} to the active branch. If there is a merge conflict, it must be resolved manually. After, you must stage and commit these resolved changes. \\
+    \hline
+        \code{git diff} & Shows all unstaged changes since the last commit. \\
+        \code{git diff HEAD} & Lists all changes in the working tree since your last commit. Includes both staged and unstaged changes. \\
+        \code{git diff \filestr{branch1} \filestr{branch2}} & Lists all changes between the tips of \filestr{branch1} and \filestr{branch2}. \\
+        \code{git diff \filestr{commit1} \filestr{commit2}} & Lists all changes between the commit hashes \filestr{commit1} and \filestr{commit2}. \\
+    \hline
+        \code{git stash (save)} & Saves all uncommitted changes to the stash. \\
+        \code{git stash pop} & Removes the most recently stashed items and reapplies them to your working directory. \\
+        \code{git stash clear} & Clears all stashes. \\
+    \hline
+        \code{git checkout HEAD \filestr{file}} & Discard any changes made in that file, reverting it back to HEAD. \\
+        \code{git checkout HEAD~\filestr{k}} & Detach HEAD $k$ commits back. To re-attach HEAD, use the \code{git switch} command. \\
+        \code{git restore \filestr{file}} & Alternative command to \code{git checkout}. \\
+        \code{git restore -{}-source \filestr{commit} \filestr{file}} & Reverts \filestr{file} to its previous state at the commit \filestr{commit}. \\
+        \code{git restore -{}-staged \filestr{file}} & Unstages the file \filestr{file}. \\
+    \hline
+        \code{git reset \filestr{commit}} & Resets the repo back to a previous commit. All changes persist as unstaged changes. \\
+        \code{git reset -{}-hard \filestr{commit}} & Implements git reset, and all changes are removed from your working directory. \\
+        \code{git revert} & Undo the changes as a new commit. Does not delete prior commits made. \\
+    \hline
+    \end{longtable}
+\end{center}
+
+
+\end{document}
