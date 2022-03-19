@@ -16,4 +16,4 @@
 /docs/**/*.synctex.gz
 
 /docs/papers/**
-/docs/data/**
+/data/*
