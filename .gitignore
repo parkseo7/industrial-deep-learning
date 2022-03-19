@@ -11,3 +11,6 @@
 /docs/**/*.cb
 /docs/**/*.cb2
 /docs/**/.*.lb
+
+/docs/**/*.fdb_latexmk
+/docs/**/*.synctex.gz
