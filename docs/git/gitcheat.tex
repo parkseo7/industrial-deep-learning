@@ -111,7 +111,7 @@
 
 Git structure: 
 \begin{center}
-    Working directory $\overset{\code{git add}}{\longrightarrow}$ Staging area $\overset{\code{git commit}}{\longrightarrow}$ Repository
+    Working directory $\overset{\code{git add}}{\longrightarrow}$ Staging area $\overset{\code{git commit}}{\longrightarrow}$  Local repo $\overset{\code{git push}}{\longrightarrow}$ Remote repo
 \end{center}
 
 Git GUI: \href{https://www.gitkraken.com}{Git Kraken}. Use the GUI to copy commit hashes.
@@ -188,5 +188,31 @@ Git ignore template: \href{https://www.toptal.com/developers/gitignore}{git igno
     \end{longtable}
 \end{center}
 
+\newpage
+
+\section{Github commands}
+
+\begin{center}
+    \begin{longtable}{|p{0.25\textwidth}|p{0.7\textwidth}|}
+    \hline
+        \multicolumn{1}{|c|}{Command} & \multicolumn{1}{c|}{Description} \\
+    \hline
+    \code{git clone \filestr{url}} & Retrieves all files associated with the github repository in \filestr{url} and will copy them to your local machine. Creates a new folder with the cloned repo in it, and assigns the default remote name `origin'. \\
+    \hline
+    \code{git remote -v} & Lists all remote names. \\
+    \code{git remote add \filestr{name} \filestr{url}} & Creates a new remote called \filestr{name} linked to the github repo \filestr{url}. \\
+    \code{git remote rename \filestr{old-name} \filestr{new-name}} & Renames the remote \filestr{old-name} to \filestr{new-name}. \\
+    \code{git remote remove \filestr{name}} & Removes the remote \filestr{name}. \\
+    \hline
+    \code{git push \filestr{remote} \filestr{branch}} & Pushes work in branch up to the remote branch. \\
+    \code{git push -u \filestr{remote} \filestr{branch}} & Sets the upstream of the local branch so that it tracks the corresponding remote branch with the same name. This allows us to set up the shortcut command \code{git push}. \\
+    \code{git push \filestr{remote} \filestr{local-b}:\filestr{remote-b}} & Pushes the local branch \filestr{local-b} up to the remote branch \filestr{remote-b}. \\
+    \hline
+    \code{git branch -r} & View all remote branches tracked by the local repository. \\
+    \code{git fetch \filestr{remote} \filestr{remote-b}} & Takes remote changes from the remote branch \filestr{remote-b} and creates a new branch called \filestr{remote}/\filestr{remote-b} on your local repo. \\
+    \hline
+    \end{longtable}
+
+\end{center}
 
 \end{document}
