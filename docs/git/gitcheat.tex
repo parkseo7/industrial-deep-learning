@@ -209,7 +209,10 @@ Git ignore template: \href{https://www.toptal.com/developers/gitignore}{git igno
     \code{git push \filestr{remote} \filestr{local-b}:\filestr{remote-b}} & Pushes the local branch \filestr{local-b} up to the remote branch \filestr{remote-b}. \\
     \hline
     \code{git branch -r} & View all remote branches tracked by the local repository. \\
+    \code{git switch \filestr{remote-branch}} & Creates a local branch called \filestr{remote-branch} and sets it up to track the remote branch \filestr{remote} / \filestr{remote-branch}. \\
+    \hline
     \code{git fetch \filestr{remote} \filestr{remote-b}} & Takes remote changes from the remote branch \filestr{remote-b} and creates a new branch called \filestr{remote}/\filestr{remote-b} on your local repo. \\
+    \code{git pull \filestr{remote} \filestr{branch}} & Updates our HEAD branch and whatever changes are retrieved from the remote branch \filestr{branch}. Essentially, \code{git fetch} + \code{git merge}. \\
     \hline
     \end{longtable}
 
